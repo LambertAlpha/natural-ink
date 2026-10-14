@@ -1,0 +1,28 @@
+{
+  "title": "Natural Ink / handwriting study",
+  "pages": [{
+    "width": 612, "height": 500,
+    "items": [
+      {"type": "text", "text": "Natural Ink", "x": 42, "y": 68, "size": 39, "color": "#035296"},
+      {"type": "text", "text": "A little variation. A readable page.", "x": 44, "y": 108, "size": 21},
+      {"type": "text", "text": "The same letters can take different shapes:", "x": 44, "y": 154, "size": 19},
+      {"type": "text", "text": "hello hello hello    notes notes notes", "x": 44, "y": 187, "size": 23},
+      {"type": "text", "text": "Soft curves, uneven bars, and a gentle pen.", "x": 44, "y": 236, "size": 19},
+      {"type": "symbol", "symbol": "=", "x": 48, "y": 266, "width": 28, "height": 10},
+      {"type": "symbol", "symbol": "+", "x": 111, "y": 259, "width": 25, "height": 26},
+      {"type": "symbol", "symbol": "−", "x": 167, "y": 265, "width": 26, "height": 12},
+      {"type": "symbol", "symbol": "→", "x": 225, "y": 261, "width": 39, "height": 24},
+      {"type": "symbol", "symbol": "∑", "x": 304, "y": 255, "width": 22, "height": 31},
+      {"type": "symbol", "symbol": "√", "x": 371, "y": 256, "width": 24, "height": 28},
+      {"type": "rule", "x": 394.8, "y": 256.7, "length": 42, "width": 1.4},
+      {"type": "text", "text": "x + 1", "x": 400, "y": 284, "size": 22},
+      {"type": "text", "text": "x", "x": 84, "y": 352, "size": 25},
+      {"type": "symbol", "symbol": "=", "x": 116, "y": 338, "width": 23, "height": 9},
+      {"type": "text", "text": "a + b", "x": 162, "y": 332, "size": 22},
+      {"type": "rule", "x": 157, "y": 341, "length": 54, "width": 1.2},
+      {"type": "text", "text": "2", "x": 180, "y": 365, "size": 22},
+      {"type": "text", "text": "Seed 183 / body variation 0.4", "x": 44, "y": 428, "size": 18, "color": "#046b4f"},
+      {"type": "text", "text": "Native ink export is experimental.", "x": 44, "y": 457, "size": 18, "color": "#046b4f"}
+    ]
+  }]
+}

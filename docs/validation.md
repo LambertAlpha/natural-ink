@@ -1,0 +1,32 @@
+# Validation boundary
+
+## Automated checks
+
+- Unit/integration tests cover deterministic randomness, isolated random state, strict model validation, unequal/curved equals signs, XML escaping, loops/dots in tracing, grid rejection, archive integrity and determinism, native payload lengths/coordinates, mandatory experimental opt-in, PDF text preservation, and repeated-render determinism.
+- Ruff checks code and formatting; mypy checks the package and validation script.
+- `uv build` produces a wheel and source distribution. Bundled font, font license, and gesture templates are checked in the wheel.
+- CI regenerates the neutral example, reconstructs its ink, and independently decodes the exported archive. The oracle is pinned to `66028455fd7fc61b7931679915d811a25485e3ad` of [Document Parser for GoodNotes](https://github.com/Kaih1825/parser-for-goodnotes).
+
+## Independent native geometry check
+
+```sh
+git clone https://github.com/Kaih1825/parser-for-goodnotes.git .local/parser-for-goodnotes
+git -C .local/parser-for-goodnotes checkout 66028455fd7fc61b7931679915d811a25485e3ad
+uv run python scripts/validate_goodnotes.py output/demo.ink.json output/demo.goodnotes \
+  --parser-root .local/parser-for-goodnotes
+```
+
+The validation script compares every page size, stroke count, color, median path width, and point sequence with the portable input. Float32 coordinate tolerance is 0.001 pt. Dots allow the explicitly documented tiny extra segment.
+
+Current local neutral-demo result: 1 page, 625 reconstructed paths, maximum coordinate error 0 pt. The source PDF and reconstructed PDF were visually inspected for legibility, placement, and symbol identity. Color-ray classification avoids false blue fragments at antialiased purple edges. Counts can change when rendering dependencies or source parameters change; CI checks data relationships, not a hardcoded stroke count.
+
+## Target-app acceptance test — pending
+
+1. Import the generated demo as a new Goodnotes document.
+2. Verify page count, paper size, ink placement, and colors.
+3. Erase part of a handwritten letter and part of an equals sign.
+4. Lasso a word; move, scale, and recolor it.
+5. Save, close, and reopen; verify the edits persist.
+6. Repeat with a dense document and note responsiveness.
+
+Record app version, operating system, exact export revision, and each result. Until this is done, the exporter remains experimental. Neither a ZIP check nor successful third-party rendering counts as an app-level pass.

@@ -1,0 +1,34 @@
+name: checks
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          python-version: '3.12'
+          enable-cache: true
+      - run: uv sync --locked
+      - run: uv run ruff check src tests scripts
+      - run: uv run ruff format --check src tests scripts
+      - run: uv run mypy src scripts
+      - run: uv run pytest -q
+      - run: uv build
+      - name: Generate a neutral native-ink sample
+        run: |
+          uv run natural-ink render examples/demo.json -o output/demo.pdf
+          uv run natural-ink trace output/demo.pdf -o output/demo.ink.json
+          uv run natural-ink export output/demo.ink.json -o output/demo.goodnotes --experimental
+      - name: Fetch independent parser at audited revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: Kaih1825/parser-for-goodnotes
+          ref: 66028455fd7fc61b7931679915d811a25485e3ad
+          path: .local/parser-for-goodnotes
+      - name: Independently decode generated ink
+        run: uv run python scripts/validate_goodnotes.py output/demo.ink.json output/demo.goodnotes --parser-root .local/parser-for-goodnotes

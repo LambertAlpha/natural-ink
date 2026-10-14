@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.local/
+output/
+dist/
+*.egg-info/
+.DS_Store
+task_plan.md
+findings.md
+progress.md
