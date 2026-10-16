@@ -1,6 +1,6 @@
 # Experimental Goodnotes adapter
 
-This is an observed-format prototype, not an implementation of an official format specification. App import and editing are unverified. The public parser used as an independent oracle is [Kaih1825/parser-for-goodnotes](https://github.com/Kaih1825/parser-for-goodnotes/tree/66028455fd7fc61b7931679915d811a25485e3ad), at the linked commit.
+This is an observed-format prototype, not an implementation of an official format specification. The project owner tested a generated dense, two-page private document in Goodnotes: erase, lasso-move, and save/reopen worked. The app version and platform were not recorded. The public parser used as an independent oracle is [Kaih1825/parser-for-goodnotes](https://github.com/Kaih1825/parser-for-goodnotes/tree/66028455fd7fc61b7931679915d811a25485e3ad), at the linked commit.
 
 ## Portable representation
 
@@ -45,12 +45,12 @@ The payload stores type 2, float32 width bits, visibility flags, one start point
 
 ## What remains uncertain
 
-- Whether current Goodnotes versions accept the generated document and page-event metadata.
-- Whether partial erase, recolor, lasso, save/reopen, and cross-device sync behave correctly.
+- Compatibility across Goodnotes versions and platforms; the current test lacks version details.
+- Whether partial-stroke erase, recolor, scale, and cross-device sync behave correctly. Basic erase, lasso-move, and save/reopen passed the user's test.
 - Whether dense documents with tens of thousands of reconstructed paths perform acceptably.
 - Whether a future adapter can write richer per-point pressure without relying on heuristic schema guesses.
 
-An independently decoded archive proves geometry can be read, not that the target application accepts the object lifecycle. Keep that distinction in README, CLI output, and release notes until app-level evidence exists.
+An independently decoded archive proves geometry can be read; the user test supplies app-level evidence for erase, lasso-move, and save/reopen, while broader compatibility still needs the checks above.
 
 ## Input tracing limitations
 

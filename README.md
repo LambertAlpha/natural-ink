@@ -18,9 +18,10 @@ Natural Ink started with a simple observation: a handwriting font still looks pr
 | Colored PDF → portable ink JSON | Experimental approximation |
 | Ink JSON → PDF / SVG preview | Working |
 | Ink JSON → native `.goodnotes` archive | Experimental; independently decoded |
-| Import, erase, recolor, and lasso in the Goodnotes app | **Not yet verified** |
+| Import, erase, lasso-move, and save/reopen in Goodnotes | User-tested on a dense, two-page private document |
+| Partial-stroke erase, recolor, and cross-version compatibility | Acceptance checks pending |
 
-**The native exporter writes stroke records, not a PDF renamed to `.goodnotes`. This does not yet guarantee that Goodnotes accepts or edits the file.** Test with a small disposable notebook first. The original PDF remains the visual reference.
+**The native exporter writes stroke records, not a PDF renamed to `.goodnotes`.** The project owner imported a generated dense, two-page document into Goodnotes, erased ink, moved it with the lasso, and reopened it after saving with the edits still available. The app version and platform were not recorded; broader compatibility remains experimental. The original PDF remains the visual reference.
 
 ## Quick start
 
@@ -66,11 +67,11 @@ uv run natural-ink trace output/demo.pdf -o output/demo.ink.json --scale 4
 uv run natural-ink preview output/demo.ink.json -o output/reconstructed.pdf
 uv run natural-ink preview output/demo.ink.json -o output/page-1.svg --page 1
 
-# Explicit opt-in: app compatibility is not verified.
+# Explicit opt-in: compatibility across app versions remains experimental.
 uv run natural-ink export output/demo.ink.json -o output/demo.goodnotes --experimental
 ```
 
-Import the `.goodnotes` file in Goodnotes. Check page count and appearance, erase part of a stroke, then move it with the lasso. Save, close, and reopen. Please report your app version, platform, and which step succeeds or fails; omit private notebook content.
+Import the `.goodnotes` file in Goodnotes. Check page count and appearance, erase part of a stroke, then move it with the lasso. Save, close, and reopen. Please report your app version, platform, and which step succeeds or fails; omit private notebook content. Editability here means manipulating ink strokes, not editing the source text or formula as semantic objects.
 
 ### Limits worth understanding
 
